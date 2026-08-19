@@ -312,17 +312,8 @@ ul.post-list li, ul.paper-list li { margin-bottom: 14px; }
 
 .paper-abstract {
   margin-top: 10px;
-}
-
-details.abstract-toggle summary {
-  cursor: pointer;
-  color: var(--accent);
-  font-size: 0.92rem;
-  user-select: none;
-}
-details.abstract-toggle p {
-  margin-top: 10px;
   color: var(--text-muted);
+  line-height: 1.6;
 }
 
 .paper-actions {
