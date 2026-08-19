@@ -102,5 +102,59 @@
         statEls.forEach(function (el) { statObserver.observe(el); });
       }
     }
+
+    // Parliament map: hover/focus/tap a dot to show its name + seat city.
+    // Each dot may carry a data-hours attribute (added once available from
+    // the FTP server dataset); when present it's shown as an extra line.
+    var tooltip = document.getElementById('parl-tooltip');
+    var mapWrap = document.querySelector('.parl-map-wrap');
+    if (tooltip && mapWrap) {
+      var nameEl = tooltip.querySelector('.parl-tooltip-name');
+      var parlEl = tooltip.querySelector('.parl-tooltip-parl');
+      var activeDot = null;
+
+      var showTooltip = function (dot) {
+        activeDot = dot;
+        dot.classList.add('is-active');
+        var statePath = document.querySelector('.state-path[data-code="' + dot.getAttribute('data-code') + '"]');
+        if (statePath) statePath.classList.add('is-active');
+        var lang = currentLang();
+        var name = dot.getAttribute(lang === 'de' ? 'data-name-de' : 'data-name-en');
+        var city = dot.getAttribute('data-city');
+        var parl = dot.getAttribute('data-parl');
+        var hours = dot.getAttribute('data-hours');
+        nameEl.textContent = name + ' — ' + city;
+        parlEl.textContent = hours ? parl + ' · ' + hours + (lang === 'de' ? ' Std. im Datensatz' : ' hrs in dataset') : parl;
+
+        var wrapRect = mapWrap.getBoundingClientRect();
+        var dotRect = dot.getBoundingClientRect();
+        var x = dotRect.left + dotRect.width / 2 - wrapRect.left;
+        var y = dotRect.top - wrapRect.top;
+        tooltip.style.left = x + 'px';
+        tooltip.style.top = y + 'px';
+        tooltip.hidden = false;
+      };
+
+      var hideTooltip = function () {
+        if (activeDot) {
+          activeDot.classList.remove('is-active');
+          var statePath = document.querySelector('.state-path[data-code="' + activeDot.getAttribute('data-code') + '"]');
+          if (statePath) statePath.classList.remove('is-active');
+        }
+        activeDot = null;
+        tooltip.hidden = true;
+      };
+
+      document.querySelectorAll('.parl-dot').forEach(function (dot) {
+        dot.addEventListener('mouseenter', function () { showTooltip(dot); });
+        dot.addEventListener('mouseleave', hideTooltip);
+        dot.addEventListener('focus', function () { showTooltip(dot); });
+        dot.addEventListener('blur', hideTooltip);
+        dot.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (activeDot === dot) { hideTooltip(); } else { showTooltip(dot); }
+        });
+      });
+    }
   });
 })();

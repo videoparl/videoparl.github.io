@@ -348,6 +348,97 @@ footer.site-footer .wrap {
   font-size: 0.92rem;
 }
 
+/* --- parliament map --- */
+.parl-map-wrap {
+  position: relative;
+  max-width: 420px;
+  margin: 8px auto 0;
+}
+.parl-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.state-path {
+  fill: var(--bg-card);
+  stroke: var(--border);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  transition: fill 0.2s ease;
+}
+.state-path.is-active {
+  fill: #eef2f6;
+}
+.parl-dot {
+  fill: var(--accent);
+  stroke: var(--bg-card);
+  stroke-width: 2;
+  cursor: pointer;
+  transition: r 0.15s ease, fill 0.15s ease;
+  outline: none;
+}
+.parl-dot:hover,
+.parl-dot:focus-visible,
+.parl-dot.is-active {
+  fill: var(--accent-hover);
+  r: 9;
+}
+.parl-dot--bundestag {
+  fill: #8a5a2c;
+}
+.parl-dot--bundestag:hover,
+.parl-dot--bundestag:focus-visible,
+.parl-dot--bundestag.is-active {
+  fill: #6e4620;
+}
+@keyframes dotPop {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+.reveal.is-visible .parl-dot {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: dotPop 0.4s ease backwards;
+}
+.parl-tooltip {
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+  background: var(--text);
+  color: var(--bg);
+  padding: 7px 11px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  white-space: nowrap;
+  transform: translate(-50%, calc(-100% - 12px));
+  box-shadow: 0 6px 16px rgba(26, 26, 26, 0.18);
+}
+.parl-tooltip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--text);
+}
+.parl-tooltip-name { font-weight: 600; }
+.parl-tooltip-parl {
+  opacity: 0.8;
+  font-size: 0.78rem;
+}
+.map-caption {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal.is-visible .parl-dot { animation: none; }
+}
+
 /* --- scroll-reveal --- */
 .reveal {
   opacity: 0;
