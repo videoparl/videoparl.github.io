@@ -1,0 +1,79 @@
+<!--
+  POST TEMPLATE — copy this file to posts/YYYY-MM-topic-slug.html and fill in:
+    TITLE (DE): ...
+    TITLE (EN): ...
+    DATE: YYYY-MM-DD
+    SUMMARY (DE): 1-2 sentences, used on the index.html posts list card
+    SUMMARY (EN): 1-2 sentences, used on the index.html posts list card
+  Then add a matching <li> card to #posts-list in ../index.html (see README.md).
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Post title] — ALPATAI</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script>
+  (function () {
+    var lang = 'en';
+    try {
+      var saved = localStorage.getItem('alpatai-lang');
+      if (saved === 'de' || saved === 'en') {
+        lang = saved;
+      } else if (navigator.language && navigator.language.toLowerCase().indexOf('de') === 0) {
+        lang = 'de';
+      }
+    } catch (e) { /* ignore */ }
+    document.documentElement.setAttribute('data-active-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+  })();
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-title" href="../index.html">ALPATAI</a>
+    <nav class="site-nav">
+      <a href="../papers.html">Working Papers</a>
+      <button id="lang-toggle" class="lang-toggle-btn" type="button">DE</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <a class="back-link" href="../index.html">
+    <span data-lang="de">← Zurück zu ALPATAI</span>
+    <span data-lang="en">← Back to ALPATAI</span>
+  </a>
+
+  <article>
+    <h1 data-lang="de">[Titel]</h1>
+    <h1 data-lang="en">[Title]</h1>
+    <p class="post-meta">[YYYY-MM-DD]</p>
+
+    <h2 data-lang="de">[Zwischenüberschrift]</h2>
+    <h2 data-lang="en">[Subheading]</h2>
+    <p data-lang="de">[Deutscher Beitragstext ...]</p>
+    <p data-lang="en">[English post text ...]</p>
+  </article>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <button id="lang-toggle-footer" class="lang-toggle-btn" type="button">DE</button>
+    <p data-lang="de">© 2026 ALPATAI-Projekt. Diese Seite wird unabhängig vom Forschungsteam gepflegt.</p>
+    <p data-lang="en">© 2026 ALPATAI Project. This site is maintained independently by the research team.</p>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>

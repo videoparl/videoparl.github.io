@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALPATAI — Analysis of Parliamentary Debates Using Multimodal Data</title>
+<meta name="description" content="ALPATAI is a DFG-funded research project analyzing text, audio and video from German parliamentary debates.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+  // Set the active language before first paint to avoid a flash of the
+  // wrong language. Preference order: saved choice > browser locale > EN.
+  (function () {
+    var lang = 'en';
+    try {
+      var saved = localStorage.getItem('alpatai-lang');
+      if (saved === 'de' || saved === 'en') {
+        lang = saved;
+      } else if (navigator.language && navigator.language.toLowerCase().indexOf('de') === 0) {
+        lang = 'de';
+      }
+    } catch (e) { /* ignore */ }
+    document.documentElement.setAttribute('data-active-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+  })();
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-title" href="index.html">ALPATAI</a>
+    <nav class="site-nav">
+      <a href="papers.html">Working Papers</a>
+      <button id="lang-toggle" class="lang-toggle-btn" type="button">DE</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1 data-lang="de">ALPATAI — Die Analyse von Parlamentsdebatten mit multimodalen Daten (Text, Audio und Bild)</h1>
+    <h1 data-lang="en">ALPATAI — Analysis of Parliamentary Debates Using Multimodal Data</h1>
+    <p class="tagline" data-lang="de">Ein DFG-gefördertes Forschungsprojekt zur multimodalen Analyse politischer Kommunikation in deutschen Parlamenten.</p>
+    <p class="tagline" data-lang="en">A DFG-funded research project on the multimodal analysis of political communication in German parliaments.</p>
+  </section>
+
+  <section id="about">
+    <h2 data-lang="de">Über das Projekt</h2>
+    <h2 data-lang="en">About the Project</h2>
+    <p data-lang="de">ALPATAI untersucht, wie Abgeordnete in deutschen Landesparlamenten und im Bundestag kommunizieren — nicht nur, was sie sagen, sondern auch, wie sie es sagen. Auf Basis von über 30.000 Stunden Video aus allen 16 Landesparlamenten und dem Bundestag (2005–2023) entsteht ein vollständig durchsuchbarer multimodaler Datensatz, der Text-, Audio- und Videoanalyse verbindet. Ein automatisiertes Verfahren erfasst systematisch Stimmlage, Mimik, Blickrichtung und Körpersprache einzelner Redebeiträge und verknüpft sie mit etablierten politikwissenschaftlichen Konzepten wie Salienz und Parteienstimmung.</p>
+    <p data-lang="en">ALPATAI examines how members of parliament in Germany's state legislatures and the Bundestag communicate — not only what they say, but how they say it. Drawing on more than 30,000 hours of video from all 16 state parliaments and the Bundestag (2005–2023), the project builds a fully searchable multimodal dataset that combines text, audio, and video analysis. An automated pipeline systematically captures vocal tone, facial expression, gaze, and body language at the level of individual speeches, linking these signals to established political science concepts such as issue salience and party sentiment.</p>
+  </section>
+
+  <section id="goals">
+    <h2 data-lang="de">Forschungsfragen</h2>
+    <h2 data-lang="en">Research Goals</h2>
+    <p data-lang="de">Das Projekt adressiert drei zentrale Fragestellungen der politischen Kommunikationsforschung:</p>
+    <p data-lang="en">The project addresses three core questions in political communication research:</p>
+    <ul class="goals" data-lang="de">
+      <li>Einfluss populistischer Parteien auf den parlamentarischen Debattenstil</li>
+      <li>Dynamiken des Themenwettbewerbs zwischen Parteien</li>
+      <li>Stimmung zwischen Parteien im deutschen Mehrebenensystem</li>
+    </ul>
+    <ul class="goals" data-lang="en">
+      <li>The influence of populist parties on parliamentary debate style</li>
+      <li>The dynamics of topic competition between parties</li>
+      <li>Inter-party mood within Germany's multi-level political system</li>
+    </ul>
+  </section>
+
+  <section id="methodology">
+    <h2 data-lang="de">Methodik</h2>
+    <h2 data-lang="en">Methodology</h2>
+    <p data-lang="de">ALPATAI erschließt Parlamentsdebatten aus 16 deutschen Landesparlamenten sowie dem Bundestag im Zeitraum 2005–2023. Aus Video- und Audiomaterial werden gesprochene Worte, Stimmlage, Mimik und Körperhaltung extrahiert. Ein automatisiertes Verfahren annotiert acht politische Emotionen und misst Themen-Salienz sowie Parteienstimmung mittels multimodaler Analyse.</p>
+    <p data-lang="en">ALPATAI curates parliamentary debates from all 16 German state parliaments and the Bundestag, covering the period 2005–2023. From video and audio recordings, the project extracts spoken words, vocal tone, facial expressions, and body language. An automated pipeline annotates eight political emotions and measures topic salience and party sentiment through multimodal analysis.</p>
+  </section>
+
+  <section id="team">
+    <h2 data-lang="de">Team</h2>
+    <h2 data-lang="en">Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <img class="avatar" src="assets/team/arnold.jpg" alt="Christian Arnold">
+        <div class="name">Christian Arnold</div>
+        <div class="affiliation">University of Birmingham</div>
+        <div class="team-contact">
+          <a href="https://chrisguarnold.github.io">Website</a>
+          · <a href="mailto:c.arnold.2@bham.ac.uk">Mail</a>
+        </div>
+      </div>
+      <div class="team-member">
+        <img class="avatar" src="assets/team/kuepfer.jpg" alt="Andreas Küpfer">
+        <div class="name">Andreas Küpfer</div>
+        <div class="affiliation">TU Darmstadt</div>
+        <div class="team-contact">
+          <a href="https://andreaskuepfer.github.io">Website</a>
+          · <a href="mailto:andreas.kuepfer@tu-darmstadt.de">Mail</a>
+        </div>
+      </div>
+      <div class="team-member">
+        <img class="avatar" src="assets/team/stecker.jpg" alt="Christian Stecker">
+        <div class="name">Christian Stecker</div>
+        <div class="affiliation">TU Darmstadt</div>
+        <div class="team-contact">
+          <a href="https://www.politikwissenschaft.tu-darmstadt.de/institut/arbeitsbereiche_und_nachwuchsgruppen/de_vergleich/forschung_stecker_bv_inhalt_1.en.jsp">Website</a>
+          · <a href="mailto:christian.stecker@tu-darmstadt.de">Mail</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="funding">
+    <h2 data-lang="de">Förderung &amp; Institutionen</h2>
+    <h2 data-lang="en">Funding &amp; Affiliations</h2>
+    <p data-lang="de">ALPATAI wird von der Deutschen Forschungsgemeinschaft (DFG) gefördert (Laufzeit: 1. März 2025 – 28. Februar 2028, Fördersumme: 287.068 €). Das Projekt ist an der TU Darmstadt sowie der University of Birmingham angesiedelt.</p>
+    <p data-lang="en">ALPATAI is funded by the German Research Foundation (DFG) (duration: March 1, 2025 – February 28, 2028; funding volume: €287,068). The project is based at TU Darmstadt and the University of Birmingham.</p>
+  </section>
+
+  <section id="blog">
+    <h2 data-lang="de">Studien &amp; Blog</h2>
+    <h2 data-lang="en">Blog / Studies</h2>
+    <p data-lang="de">Hier werden künftig Kurzbeiträge zu Zwischenergebnissen und Studien des Projekts veröffentlicht. Der erste Beitrag folgt in Kürze.</p>
+    <p data-lang="en">Short write-ups on interim results and studies from the project will be published here. The first post is coming soon.</p>
+    <ul class="post-list" id="posts-list">
+      <li class="card placeholder">
+        <span data-lang="de">Beiträge folgen in Kürze.</span>
+        <span data-lang="en">Posts coming soon.</span>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <button id="lang-toggle-footer" class="lang-toggle-btn" type="button">DE</button>
+    <p data-lang="de">© 2026 ALPATAI-Projekt. Diese Seite wird unabhängig vom Forschungsteam gepflegt.</p>
+    <p data-lang="en">© 2026 ALPATAI Project. This site is maintained independently by the research team.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
