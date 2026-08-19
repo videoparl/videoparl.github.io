@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — ALPATAI</title>
+<meta name="description" content="Short write-ups on interim results and studies from the ALPATAI project.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+  (function () {
+    var lang = 'en';
+    try {
+      var saved = localStorage.getItem('alpatai-lang');
+      if (saved === 'de' || saved === 'en') lang = saved;
+    } catch (e) { /* ignore */ }
+    document.documentElement.setAttribute('data-active-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+  })();
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-title" href="index.html">ALPATAI</a>
+    <nav class="site-nav">
+      <a href="blog.html" class="active">Blog</a>
+      <a href="papers.html">Working Papers</a>
+      <button id="lang-toggle" class="lang-toggle-btn" type="button">DE</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <a class="back-link" href="index.html">
+    <span data-lang="de">← Zurück zu ALPATAI</span>
+    <span data-lang="en">← Back to ALPATAI</span>
+  </a>
+
+  <section class="reveal">
+    <h1 data-lang="de">Blog</h1>
+    <h1 data-lang="en">Blog</h1>
+  </section>
+
+  <section class="reveal">
+    <ul class="post-list" id="posts-list">
+      <li class="card placeholder">
+        <span data-lang="de">Beiträge folgen in Kürze.</span>
+        <span data-lang="en">Posts coming soon.</span>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p data-lang="de">© 2026 ALPATAI-Projekt.</p>
+    <p data-lang="en">© 2026 ALPATAI Project.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

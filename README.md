@@ -8,10 +8,11 @@ repo's `main` branch root directly.
 
 ## Structure
 
-- `index.html` — landing page (bilingual DE/EN, project info, team, blog/studies list)
+- `index.html` — landing page (bilingual DE/EN, project info, team, coverage map)
+- `blog.html` — Blog tab (list of short posts/studies)
 - `papers.html` — Working Papers tab (embeds OSF/SocArXiv preprints)
 - `style.css` — shared stylesheet for all pages
-- `script.js` — language toggle + lazy-loaded paper embeds
+- `script.js` — language toggle + lazy-loaded paper embeds + map interactions
 - `posts/_template.html` — starting point for a new blog post
 - `assets/` — favicon etc.
 - `.nojekyll` — disables GitHub Pages' default Jekyll processing
@@ -21,7 +22,7 @@ repo's `main` branch root directly.
 1. Copy `posts/_template.html` to `posts/YYYY-MM-topic-slug.html`.
 2. Fill in the bilingual title, date, and body — every piece of text is duplicated as
    a `data-lang="de"` and a `data-lang="en"` element; keep both in sync.
-3. Add one new `<li class="card">` entry to `#posts-list` in `index.html` with the
+3. Add one new `<li class="card">` entry to `#posts-list` in `blog.html` with the
    post's title, date, a 1–2 sentence bilingual summary, and a "Read more →" link to
    the new file. Remove the "coming soon" placeholder card once the first post exists.
 4. Commit and push to `main` — the site updates automatically via GitHub Pages.
@@ -43,8 +44,7 @@ To add a paper hosted on OSF/SocArXiv (or any OSF-backed preprint server):
    ```
 3. Copy a new `<li class="card">` block in `papers.html` (use the existing entry as a
    template), and update:
-   - `paper-title` and `paper-meta` (authors, venue, date)
-   - the abstract text inside `<details class="abstract-toggle">`
+   - `paper-title`, `paper-meta` (authors, venue, date), and the `paper-abstract` text
    - `data-target` / `data-embed-url` / `data-embed-title` on the "Show preprint"
      button, and the matching `id` on the empty `<div class="embed-wrap">` below it
    - the "View on OSF" link (the paper's DOI, e.g. `https://doi.org/10.31235/osf.io/<id>`)

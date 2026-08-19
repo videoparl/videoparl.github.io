@@ -122,22 +122,10 @@ main { padding: 40px 0 20px; }
 section { margin-bottom: 48px; }
 
 section h2 {
-  position: relative;
   font-size: 1.4rem;
   margin-bottom: 14px;
   padding-bottom: 8px;
-  padding-left: 16px;
   border-bottom: 1px solid var(--border);
-}
-section h2::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.3em;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
 }
 
 /* --- hero --- */
