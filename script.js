@@ -125,7 +125,7 @@
         var lang = currentLang();
         var name = dot.getAttribute(lang === 'de' ? 'data-name-de' : 'data-name-en');
         var city = dot.getAttribute(lang === 'de' ? 'data-city-de' : 'data-city-en');
-        var parl = dot.getAttribute('data-parl');
+        var parl = dot.getAttribute(lang === 'de' ? 'data-parl-de' : 'data-parl-en');
         var hours = dot.getAttribute('data-hours');
         nameEl.textContent = name + ' — ' + city;
         parlEl.textContent = hours ? parl + ' · ' + hours + (lang === 'de' ? ' Std. im Datensatz' : ' hrs in dataset') : parl;
@@ -157,6 +157,19 @@
         dot.addEventListener('click', function (e) {
           e.preventDefault();
           if (activeDot === dot) { hideTooltip(); } else { showTooltip(dot); }
+        });
+      });
+
+      // Hovering the state shape itself (a much bigger target than the dot)
+      // shows the same tooltip for that parliament.
+      document.querySelectorAll('.state-path').forEach(function (path) {
+        var matchingDot = document.querySelector('.parl-dot[data-code="' + path.getAttribute('data-code') + '"]');
+        if (!matchingDot) return;
+        path.addEventListener('mouseenter', function () { showTooltip(matchingDot); });
+        path.addEventListener('mouseleave', hideTooltip);
+        path.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (activeDot === matchingDot) { hideTooltip(); } else { showTooltip(matchingDot); }
         });
       });
     }

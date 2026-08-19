@@ -1,7 +1,7 @@
-# ALPATAI project site
+# VideoParl project site
 
 Source for [videoparl.github.io](https://videoparl.github.io/) — the landing page for the
-DFG-funded ALPATAI project ("Analysis of Parliamentary Debates Using Multimodal Data").
+DFG-funded VideoParl project ("Analysis of Parliamentary Debates Using Multimodal Data").
 
 Plain hand-authored HTML/CSS, no build step, no framework. GitHub Pages serves this
 repo's `main` branch root directly.
