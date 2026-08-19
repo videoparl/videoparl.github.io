@@ -62,7 +62,17 @@
       </div>
     </div>
 
-    <div class="hero-features">
+    <div class="hero-features-toggle">
+      <button type="button" class="features-toggle-btn" id="features-toggle-btn" aria-expanded="false" aria-controls="hero-features-panel">
+        <span class="label-show" data-lang="de">Details zu extrahierten Text-, Video- und Audio-Features</span>
+        <span class="label-show" data-lang="en">Details on extracted text, video, and audio features</span>
+        <span class="label-hide" data-lang="de">Features ausblenden</span>
+        <span class="label-hide" data-lang="en">Hide features</span>
+        <svg class="chevron" width="10" height="7" viewBox="0 0 10 7" fill="none" aria-hidden="true">
+          <path d="M1 1L5 5.5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="hero-features" id="hero-features-panel" hidden>
       <div class="feature-group">
         <div class="feature-group-label">Text</div>
         <ul class="feature-tags" data-lang="de">
@@ -104,8 +114,31 @@
           <li>Depth estimation</li>
         </ul>
       </div>
+      </div>
     </div>
   </section>
+
+  <div class="collage-row-wrap reveal">
+  <div class="collage-row">
+    <div class="collage-tile" data-code="sh"><img src="assets/collage/sh.jpg" alt="Schleswig-Holstein State Parliament" loading="lazy"></div>
+    <div class="collage-tile" data-code="hb"><img src="assets/collage/hb.jpg" alt="Bremen Parliament" loading="lazy"></div>
+    <div class="collage-tile" data-code="hh"><img src="assets/collage/hh.jpg" alt="Hamburg Parliament" loading="lazy"></div>
+    <div class="collage-tile" data-code="mv"><img src="assets/collage/mv.jpg" alt="Mecklenburg-Vorpommern State Parliament" loading="lazy"></div>
+    <div class="collage-tile" data-code="ni"><img src="assets/collage/ni.jpg" alt="Lower Saxony State Parliament" loading="lazy"></div>
+    <div class="collage-tile" data-code="be"><img src="assets/collage/be.jpg" alt="Berlin House of Representatives" loading="lazy"></div>
+    <div class="collage-tile" data-code="bb"><img src="assets/collage/bb.jpg" alt="Brandenburg State Parliament" loading="lazy"></div>
+    <div class="collage-tile" data-code="nrw"><img src="assets/collage/nrw.jpg" alt="North Rhine-Westphalia State Parliament" loading="lazy"></div>
+    <div class="collage-tile" data-code="sn"><img src="assets/collage/sn.jpg" alt="Saxony State Parliament" loading="lazy"></div>
+    <div class="collage-tile" data-code="st"><img src="assets/collage/st.jpg" alt="Saxony-Anhalt State Parliament" loading="lazy"></div>
+    <div class="collage-tile" data-code="he"><img src="assets/collage/he.jpg" alt="Hesse State Parliament" loading="lazy"></div>
+    <div class="collage-tile" data-code="th"><img src="assets/collage/th.jpg" alt="Thuringia State Parliament" loading="lazy"></div>
+    <div class="collage-tile" data-code="rp"><img src="assets/collage/rp.jpg" alt="Rhineland-Palatinate State Parliament" loading="lazy"></div>
+    <div class="collage-tile" data-code="sl"><img src="assets/collage/sl.jpg" alt="Saarland State Parliament" loading="lazy"></div>
+    <div class="collage-tile" data-code="bw"><img src="assets/collage/bw.jpg" alt="Baden-Württemberg State Parliament" loading="lazy"></div>
+    <div class="collage-tile" data-code="by"><img src="assets/collage/by.jpg" alt="Bavarian State Parliament" loading="lazy"></div>
+    <div class="collage-tile" data-code="de"><img src="assets/collage/de.jpg" alt="German Bundestag" loading="lazy"></div>
+  </div>
+  </div>
 
   <section id="about" class="reveal">
     <div class="about-row">

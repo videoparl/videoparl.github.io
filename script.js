@@ -117,11 +117,27 @@
       var parlEl = tooltip.querySelector('.parl-tooltip-parl');
       var activeDot = null;
 
-      var showTooltip = function (dot) {
+      var activeTile = null;
+
+      var showTooltip = function (dot, opts) {
+        opts = opts || {};
         activeDot = dot;
         dot.classList.add('is-active');
-        var statePath = document.querySelector('.state-path[data-code="' + dot.getAttribute('data-code') + '"]');
+        var code = dot.getAttribute('data-code');
+        var statePath = document.querySelector('.state-path[data-code="' + code + '"]');
         if (statePath) statePath.classList.add('is-active');
+        var tile = document.querySelector('.collage-tile[data-code="' + code + '"]') ||
+                   (dot.classList.contains('parl-dot--bundestag') ? document.querySelector('.collage-tile[data-code="de"]') : null);
+        if (tile) {
+          tile.classList.add('is-active');
+          activeTile = tile;
+          // Center it in the collage row — but only when triggered from the
+          // map side. Re-centering a tile the user is already hovering
+          // directly would shift it out from under their cursor.
+          if (opts.scrollCollage !== false) {
+            tile.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+        }
         var lang = currentLang();
         var name = dot.getAttribute(lang === 'de' ? 'data-name-de' : 'data-name-en');
         var city = dot.getAttribute(lang === 'de' ? 'data-city-de' : 'data-city-en');
@@ -145,7 +161,9 @@
           var statePath = document.querySelector('.state-path[data-code="' + activeDot.getAttribute('data-code') + '"]');
           if (statePath) statePath.classList.remove('is-active');
         }
+        if (activeTile) activeTile.classList.remove('is-active');
         activeDot = null;
+        activeTile = null;
         tooltip.hidden = true;
       };
 
@@ -172,6 +190,94 @@
           if (activeDot === matchingDot) { hideTooltip(); } else { showTooltip(matchingDot); }
         });
       });
+
+      // Hovering a collage photo highlights the matching dot/state on the map.
+      document.querySelectorAll('.collage-tile').forEach(function (tile) {
+        var code = tile.getAttribute('data-code');
+        var matchingDot = document.querySelector('.parl-dot[data-code="' + code + '"]') ||
+                           (code === 'de' ? document.querySelector('.parl-dot--bundestag') : null);
+        if (!matchingDot) return;
+        tile.addEventListener('mouseenter', function () { showTooltip(matchingDot, { scrollCollage: false }); });
+        tile.addEventListener('mouseleave', hideTooltip);
+      });
+    }
+
+    // Collage row: shuffle tile order on every load, so it's a different mix each visit.
+    var collageRow = document.querySelector('.collage-row');
+    if (collageRow) {
+      var tiles = Array.prototype.slice.call(collageRow.children);
+      for (var i = tiles.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = tiles[i]; tiles[i] = tiles[j]; tiles[j] = tmp;
+      }
+      tiles.forEach(function (tile) { collageRow.appendChild(tile); });
+    }
+
+    // Hero features toggle: animated expand/collapse (hidden by default).
+    var featuresBtn = document.getElementById('features-toggle-btn');
+    var featuresPanel = document.getElementById('hero-features-panel');
+    if (featuresBtn && featuresPanel) {
+      featuresBtn.addEventListener('click', function () {
+        var isOpen = featuresPanel.classList.contains('is-open');
+        if (isOpen) {
+          featuresPanel.style.maxHeight = featuresPanel.scrollHeight + 'px';
+          // force reflow so the browser registers the start height before animating to 0
+          featuresPanel.offsetHeight; // eslint-disable-line no-unused-expressions
+          featuresPanel.style.maxHeight = '0px';
+          featuresPanel.classList.remove('is-open');
+          featuresBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          featuresPanel.hidden = false;
+          featuresPanel.style.maxHeight = '0px';
+          featuresPanel.offsetHeight; // eslint-disable-line no-unused-expressions
+          featuresPanel.classList.add('is-open');
+          featuresPanel.style.maxHeight = featuresPanel.scrollHeight + 'px';
+          featuresBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+      featuresPanel.addEventListener('transitionend', function (e) {
+        if (e.propertyName !== 'max-height') return;
+        if (featuresPanel.classList.contains('is-open')) {
+          featuresPanel.style.maxHeight = 'none'; // let it breathe if content reflows later
+        } else {
+          featuresPanel.hidden = true;
+        }
+      });
+    }
+
+    // Ambient idle behaviour for the collage row: slowly auto-scroll back
+    // and forth so it's obvious there's more to see. No highlighting —
+    // just movement. Pauses the moment the user hovers/focuses/touches the
+    // row, resumes a little after they leave.
+    var collageWrap = document.querySelector('.collage-row-wrap');
+    var collageScroller = document.querySelector('.collage-row');
+    var reduceMotionMQ = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (collageWrap && collageScroller && !(reduceMotionMQ && reduceMotionMQ.matches)) {
+      var idlePaused = false;
+      var scrollDir = 1;
+
+      var tickScroll = function () {
+        if (idlePaused) return;
+        var maxScroll = collageScroller.scrollWidth - collageScroller.clientWidth;
+        if (maxScroll <= 0) return;
+        collageScroller.scrollLeft += 0.9 * scrollDir;
+        if (collageScroller.scrollLeft >= maxScroll) scrollDir = -1;
+        else if (collageScroller.scrollLeft <= 0) scrollDir = 1;
+      };
+
+      var pauseIdle = function () { idlePaused = true; };
+      var resumeIdleSoon = function () {
+        clearTimeout(resumeIdleSoon._t);
+        resumeIdleSoon._t = setTimeout(function () { idlePaused = false; }, 1200);
+      };
+
+      collageWrap.addEventListener('mouseenter', pauseIdle);
+      collageWrap.addEventListener('mouseleave', resumeIdleSoon);
+      collageWrap.addEventListener('touchstart', pauseIdle, { passive: true });
+      collageWrap.addEventListener('focusin', pauseIdle);
+      collageWrap.addEventListener('focusout', resumeIdleSoon);
+
+      setInterval(tickScroll, 30);
     }
   });
 })();
