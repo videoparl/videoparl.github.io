@@ -4,13 +4,14 @@
   --bg: #fafaf8;
   --bg-card: #ffffff;
   --text: #1a1a1a;
-  --text-muted: #55534d;
-  --accent: #2c4a6e;
-  --accent-hover: #1d3350;
-  --border: #e5e3de;
+  --text-muted: #4a483f;
+  --accent: #23405f;
+  --accent-hover: #16283b;
+  --border: #b3ac9a;
+  --border-soft: #d6d1c3;
   --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-heading: "Source Serif 4", Georgia, "Times New Roman", serif;
-  --max-width: 760px;
+  --max-width: 875px;
 }
 
 * { box-sizing: border-box; }
@@ -218,7 +219,7 @@ ul.goals li { margin-bottom: 6px; }
   object-fit: cover;
   display: block;
   margin-bottom: 10px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-soft);
   transition: transform 0.25s ease, border-color 0.25s ease;
 }
 .team-member:hover .avatar {
@@ -251,8 +252,8 @@ ul.goals li { margin-bottom: 6px; }
 }
 .card:not(.placeholder):hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(26, 26, 26, 0.07);
-  border-color: #d5d2ca;
+  box-shadow: 0 10px 24px rgba(26, 26, 26, 0.1);
+  border-color: var(--accent);
 }
 
 ul.post-list, ul.paper-list {
@@ -349,6 +350,22 @@ footer.site-footer .wrap {
 }
 
 /* --- parliament map --- */
+.about-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+.about-text {
+  flex: 1 1 320px;
+  min-width: 260px;
+}
+.about-row .parl-map-wrap {
+  flex: 1 1 300px;
+  max-width: 380px;
+  margin: 4px 0 0;
+}
+
 .parl-map-wrap {
   position: relative;
   max-width: 420px;
@@ -361,14 +378,15 @@ footer.site-footer .wrap {
   overflow: visible;
 }
 .state-path {
-  fill: var(--bg-card);
-  stroke: var(--border);
-  stroke-width: 1.4;
+  fill: #f1eee3;
+  stroke: #8f8a79;
+  stroke-width: 1.8;
   stroke-linejoin: round;
-  transition: fill 0.2s ease;
+  transition: fill 0.2s ease, stroke 0.2s ease;
 }
 .state-path.is-active {
-  fill: #eef2f6;
+  fill: #dbe3ea;
+  stroke: var(--accent);
 }
 .parl-dot {
   fill: var(--accent);
@@ -393,13 +411,11 @@ footer.site-footer .wrap {
   fill: #6e4620;
 }
 @keyframes dotPop {
-  from { transform: scale(0); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 .reveal.is-visible .parl-dot {
-  transform-origin: center;
-  transform-box: fill-box;
-  animation: dotPop 0.4s ease backwards;
+  animation: dotPop 0.3s ease-out both;
 }
 .parl-tooltip {
   position: absolute;
@@ -459,4 +475,5 @@ footer.site-footer .wrap {
   .hero { padding: 28px 20px 24px; }
   .hero-stats { gap: 24px; }
   .embed-wrap iframe { height: 480px; }
+  .about-row .parl-map-wrap { max-width: 380px; margin: 8px auto 0; flex-basis: 100%; }
 }

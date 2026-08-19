@@ -16,6 +16,10 @@
       btn.textContent = lang === 'de' ? 'EN' : 'DE';
       btn.setAttribute('aria-label', lang === 'de' ? 'Switch to English' : 'Zu Deutsch wechseln');
     });
+    var map = document.querySelector('.parl-map[data-aria-en]');
+    if (map) {
+      map.setAttribute('aria-label', map.getAttribute(lang === 'de' ? 'data-aria-de' : 'data-aria-en'));
+    }
   }
 
   function toggleLang() {
@@ -120,7 +124,7 @@
         if (statePath) statePath.classList.add('is-active');
         var lang = currentLang();
         var name = dot.getAttribute(lang === 'de' ? 'data-name-de' : 'data-name-en');
-        var city = dot.getAttribute('data-city');
+        var city = dot.getAttribute(lang === 'de' ? 'data-city-de' : 'data-city-en');
         var parl = dot.getAttribute('data-parl');
         var hours = dot.getAttribute('data-hours');
         nameEl.textContent = name + ' — ' + city;
