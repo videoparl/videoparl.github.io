@@ -23,11 +23,7 @@
     var lang = 'en';
     try {
       var saved = localStorage.getItem('alpatai-lang');
-      if (saved === 'de' || saved === 'en') {
-        lang = saved;
-      } else if (navigator.language && navigator.language.toLowerCase().indexOf('de') === 0) {
-        lang = 'de';
-      }
+      if (saved === 'de' || saved === 'en') lang = saved;
     } catch (e) { /* ignore */ }
     document.documentElement.setAttribute('data-active-lang', lang);
     document.documentElement.setAttribute('lang', lang);
@@ -68,9 +64,8 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <button id="lang-toggle-footer" class="lang-toggle-btn" type="button">DE</button>
-    <p data-lang="de">© 2026 ALPATAI-Projekt. Diese Seite wird unabhängig vom Forschungsteam gepflegt.</p>
-    <p data-lang="en">© 2026 ALPATAI Project. This site is maintained independently by the research team.</p>
+    <p data-lang="de">© 2026 ALPATAI-Projekt.</p>
+    <p data-lang="en">© 2026 ALPATAI Project.</p>
   </div>
 </footer>
 

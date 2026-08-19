@@ -46,5 +46,61 @@
         btn.hidden = true;
       });
     });
+
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Scroll-reveal: fade/slide sections up into view once, on first scroll past.
+    var revealEls = document.querySelectorAll('.reveal');
+    if (revealEls.length) {
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+      } else {
+        var revealObserver = new IntersectionObserver(function (entries, obs) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealEls.forEach(function (el) { revealObserver.observe(el); });
+      }
+    }
+
+    // Count up the hero stats once they scroll into view.
+    var statEls = document.querySelectorAll('.stat-num[data-count]');
+    if (statEls.length) {
+      var animateStat = function (el) {
+        var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+        var suffix = el.getAttribute('data-suffix') || '';
+        if (reduceMotion) {
+          el.textContent = target.toLocaleString('en-US') + suffix;
+          return;
+        }
+        var duration = 1100;
+        var start = null;
+        function step(ts) {
+          if (start === null) start = ts;
+          var progress = Math.min((ts - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+          el.textContent = Math.round(target * eased).toLocaleString('en-US') + suffix;
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      };
+      if (!('IntersectionObserver' in window)) {
+        statEls.forEach(animateStat);
+      } else {
+        var statObserver = new IntersectionObserver(function (entries, obs) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              animateStat(entry.target);
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.4 });
+        statEls.forEach(function (el) { statObserver.observe(el); });
+      }
+    }
   });
 })();

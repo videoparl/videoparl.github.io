@@ -15,11 +15,7 @@
     var lang = 'en';
     try {
       var saved = localStorage.getItem('alpatai-lang');
-      if (saved === 'de' || saved === 'en') {
-        lang = saved;
-      } else if (navigator.language && navigator.language.toLowerCase().indexOf('de') === 0) {
-        lang = 'de';
-      }
+      if (saved === 'de' || saved === 'en') lang = saved;
     } catch (e) { /* ignore */ }
     document.documentElement.setAttribute('data-active-lang', lang);
     document.documentElement.setAttribute('lang', lang);
@@ -45,14 +41,14 @@
     <span data-lang="en">← Back to ALPATAI</span>
   </a>
 
-  <section>
+  <section class="reveal">
     <h1 data-lang="de">Working Papers</h1>
     <h1 data-lang="en">Working Papers</h1>
     <p data-lang="de">Vorabveröffentlichungen und Arbeitspapiere aus dem ALPATAI-Projekt. Die Vorschau wird eingebettet über den öffentlichen PDF-Viewer von OSF geladen.</p>
     <p data-lang="en">Preprints and working papers from the ALPATAI project. Previews are embedded via OSF's public PDF viewer.</p>
   </section>
 
-  <section>
+  <section class="reveal">
     <ul class="paper-list">
 
       <!-- Paper 1: Arnold, Küpfer, Stecker — SocArXiv preprint -->
@@ -94,9 +90,8 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <button id="lang-toggle-footer" class="lang-toggle-btn" type="button">DE</button>
-    <p data-lang="de">© 2026 ALPATAI-Projekt. Diese Seite wird unabhängig vom Forschungsteam gepflegt.</p>
-    <p data-lang="en">© 2026 ALPATAI Project. This site is maintained independently by the research team.</p>
+    <p data-lang="de">© 2026 ALPATAI-Projekt.</p>
+    <p data-lang="en">© 2026 ALPATAI Project.</p>
   </div>
 </footer>
 
