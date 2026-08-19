@@ -277,6 +277,15 @@
       collageWrap.addEventListener('focusin', pauseIdle);
       collageWrap.addEventListener('focusout', resumeIdleSoon);
 
+      // Also pause while hovering the map itself — otherwise the ambient
+      // ticker fights the "center this tile" scroll that a map hover triggers.
+      if (mapWrap) {
+        mapWrap.addEventListener('mouseenter', pauseIdle);
+        mapWrap.addEventListener('mouseleave', resumeIdleSoon);
+        mapWrap.addEventListener('focusin', pauseIdle);
+        mapWrap.addEventListener('focusout', resumeIdleSoon);
+      }
+
       setInterval(tickScroll, 30);
     }
   });
