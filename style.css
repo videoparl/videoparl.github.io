@@ -196,6 +196,40 @@ section h2::before {
   margin-top: 5px;
 }
 
+.hero-features {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+.feature-group {
+  flex: 1 1 140px;
+  min-width: 140px;
+}
+.feature-group-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.feature-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.87rem;
+  color: var(--text-muted);
+}
+.feature-tags li {
+  padding: 4px 0;
+}
+.feature-tags li + li {
+  border-top: 1px dashed var(--border-soft);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero::before { animation: none; }
 }
