@@ -53,6 +53,13 @@
 
     var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // Phones/tablets and narrow windows: a map tap must not scroll the page.
+    // Evaluated on every call so rotating or resizing takes effect immediately.
+    var isMobileLike = function () {
+      return !!(window.matchMedia &&
+        window.matchMedia('(hover: none), (pointer: coarse), (max-width: 767px)').matches);
+    };
+
     // Scroll-reveal: fade/slide sections up into view once, on first scroll past.
     var revealEls = document.querySelectorAll('.reveal');
     if (revealEls.length) {
@@ -135,7 +142,16 @@
           // map side. Re-centering a tile the user is already hovering
           // directly would shift it out from under their cursor.
           if (opts.scrollCollage !== false) {
-            tile.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            if (isMobileLike()) {
+              // Only re-center inside the gallery row; never move the page.
+              var row = tile.parentElement;
+              var rowRect = row.getBoundingClientRect();
+              var tileRect = tile.getBoundingClientRect();
+              var delta = (tileRect.left + tileRect.width / 2) - (rowRect.left + rowRect.width / 2);
+              row.scrollTo({ left: row.scrollLeft + delta, behavior: 'smooth' });
+            } else {
+              tile.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
           }
         }
         var lang = currentLang();
@@ -284,6 +300,9 @@
         mapWrap.addEventListener('mouseleave', resumeIdleSoon);
         mapWrap.addEventListener('focusin', pauseIdle);
         mapWrap.addEventListener('focusout', resumeIdleSoon);
+        // Taps/clicks (no hover on touch): pause so the drift doesn't cut
+        // short the row's smooth re-centering, then resume shortly after.
+        mapWrap.addEventListener('click', function () { pauseIdle(); resumeIdleSoon(); });
       }
 
       setInterval(tickScroll, 30);

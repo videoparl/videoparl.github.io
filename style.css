@@ -228,6 +228,7 @@ section h2 {
   overflow: hidden;
   border: 1px solid var(--border-soft);
   cursor: pointer;
+  scroll-margin-top: 110px;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .collage-tile img {
@@ -598,3 +599,32 @@ footer.site-footer .wrap {
   .embed-wrap iframe { height: 480px; }
   .about-row .parl-map-wrap { max-width: 380px; margin: 8px auto 0; flex-basis: 100%; }
 }
+
+/* Funder / partner logos */
+.logo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px 40px;
+  margin-top: 20px;
+  padding: 20px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.logo-row a { display: inline-flex; }
+.logo-row img {
+  height: 52px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+@media (max-width: 600px) {
+  .logo-row { gap: 16px 24px; padding: 16px; }
+  .logo-row img { height: 40px; }
+}
+
+.tour-paper { margin: 6px 0 0; }
+.logo-row img.logo-tu { height: 68px; }
+@media (max-width: 600px) { .logo-row img.logo-tu { height: 52px; } }
